@@ -1,0 +1,9 @@
+PyAutoGUI
+numpy
+WMI
+PyGetWindow
+opencv-python
+pyinstaller
+mss
+cryptography
+clipboard
