@@ -2,16 +2,15 @@ import cv2
 from AutoControl.Detect.getImage import get_image
 
 
-def image_match(template, base, offset, is_ocr):
+def image_match(template, offset, is_ocr):
     """
     判断图像中是否存在模板图片
     :param template: 模板的绝对路径
-    :param base:基址
     :param offset:偏移
     :param is_ocr:是否是二值图像匹配
     :return: max_val  最大匹配度
     """
-    image_array = get_image(base, offset)
+    image_array = get_image(offset)
     if is_ocr:
         # 将截图图像转为灰度图像
         gray_array = cv2.cvtColor(image_array, cv2.COLOR_BGR2GRAY)
