@@ -20,9 +20,8 @@
   ],
   "miao_code": "tHSiLK0",
   "slot_value": 40,
-  "auto_catch": 1,
-  "pokeball_rank": 0,
   "high_prob": 0.99,
   "mid_prob": 0.009,
-  "low_prob": 0.001
+  "low_prob": 0.001,
+  "behavior_pro": 0.5
 }

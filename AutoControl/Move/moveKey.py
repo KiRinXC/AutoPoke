@@ -105,18 +105,25 @@ class MoveKeyToolBar(MoveKey):
 class MoveKeyReminder(MoveKey):
     def __init__(self):
         super().__init__()
-        self.alert_confirm_keys = [self.top_key,self.A_key]
+
     def remind_key(self):
         self.confirm_key()
 
     def alert_confirm_key(self):
-        self.item_orderly_key(self.alert_confirm_keys)
+        self.item_orderly_key([self.top_key,self.A_key])
 
     def alert_cancel_key(self):
         self.cancel_key()
 
     def pp_confirm_key(self):
         self.confirm_key()
+
+    def individual_values_key(self):
+        self.item_orderly_key([self.right_key,self.right_key,self.right_key])
+
+    def poke_info_close_key(self):
+        self.cancel_key()
+
 
 
 

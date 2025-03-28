@@ -67,7 +67,7 @@ class Handler(object):
     def get_template_path(self,file_name):
         template_path = os.path.join(self.template_dir, f"{file_name}.png")
         if not os.path.exists(template_path):
-            self.log.error("{}模板图片不存在")
+            self.log.warning(f"{file_name}.png模板图片不存在")
             return None
         return template_path
 

@@ -31,8 +31,12 @@ class MoveMouse:
         self.reg_alert_confirm = self.RegMouse['reg_alert_confirm']
         self.reg_pp_confirm = self.RegMouse['reg_pp_confirm']
 
+        self.reg_individual_values = self.RegMouse['reg_individual_values']
+        self.reg_poke_info_close = self.RegMouse['reg_poke_info_close']
+
         self.reg_first_pokebar = self.RegMouse['reg_first_pokebar']
         self.reg_poke_props = self.RegMouse['reg_poke_props']
+
 
     @staticmethod
     def loc_add(p1, p2):
@@ -192,9 +196,14 @@ class MoveMouseReminder(MoveMouse):
         """仅适用于香水、喷雾"""
         self.item_mouse(self.reg_alert_confirm)
 
-    def alert_cancel_key(self):
-        """不同的警告框的位置也不尽相同"""
-        pass
-
     def pp_confirm_mouse(self):
         self.item_mouse(self.reg_pp_confirm)
+
+    def individual_values_mouse(self):
+        self.item_mouse(self.reg_individual_values)
+
+    def poke_info_close_mouse(self):
+        self.item_mouse(self.reg_poke_info_close)
+
+
+

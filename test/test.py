@@ -1,2 +1,3 @@
-a = [True]
-print(a[0])
+from AutoControl.Utili.control.screenShot import screen_shot
+
+screen_shot()

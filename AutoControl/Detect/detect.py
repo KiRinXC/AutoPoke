@@ -3,7 +3,7 @@ import logging
 from AutoControl.Detect.colorcCheck import is_all_black,is_all_white,is_any_black,is_any_white
 from AutoControl.Detect.imageMatch import image_match
 from AutoControl.Utili.filesys.handler import Handler
-
+from AutoControl.Utili.web.reminder import remind_shiny
 
 class Detect:
     def __init__(self):
@@ -30,6 +30,7 @@ class Detect:
 
         self.reg_icon_walking = self.RegDetect["reg_icon_walking"]
         self.reg_icon_props = self.RegDetect["reg_icon_props"]
+        self.reg_icon_pokedex = self.RegDetect["reg_icon_pokedex"]
 
         self.tem_location_path = handler.get_template_path('location')
         self.tem_escape_path = handler.get_template_path('escape')
@@ -40,12 +41,13 @@ class Detect:
         self.tem_poke_status_path = handler.get_template_path('poke_status')
         self.tem_poke_shiny_path = handler.get_template_path('poke_shiny')
 
-        self.tem_icon_walking_path = handler.get_template_path('icon_walking')
-        self.tem_icon_props_path = handler.get_template_path('icon_props')
-
         self.tem_alert_confirm_path = handler.get_template_path('alert_confirm')
         self.tem_remind_hooked_path = handler.get_template_path('remind_hooked')
         self.tem_remind_passive_skill_path = handler.get_template_path('remind_passive_skill')
+
+        self.tem_icon_walking_path = handler.get_template_path('icon_walking')
+        self.tem_icon_props_path = handler.get_template_path('icon_props')
+        self.tem_icon_pokedex_path = handler.get_template_path('icon_pokedex')
 
         self.Settings = handler.download_json('Settings')
         self.match_thresh = self.Settings["match_thresh"]
@@ -197,6 +199,7 @@ class DetectTarget(Detect):
         max_val = image_match(self.tem_poke_shiny_path, self.reg_poke_info, is_ocr=True)
         if max_val >= self.match_thresh:
             self.logger.debug(f"确认为闪光精灵，最大匹配度为{max_val}")
+            remind_shiny()
             return True
         else:
             self.logger.debug(f"非闪光精灵，最大匹配度为{max_val}")
@@ -205,6 +208,7 @@ class DetectTarget(Detect):
     def detect_target(self):
         """
         检测是否是目标精灵 仅依靠名字 或者是 性别和属性
+        :return: 返回的是一个状态列表
         """
         status_list = []
         while True:
@@ -288,6 +292,17 @@ class DetectIcon(Detect):
             return True
         else:
             self.logger.debug(f"精灵未携带道具，最大匹配度为{max_val}")
+            return False
+
+    def detect_pokedex_icon(self):
+        """
+        检测宝可梦图鉴图标
+        """
+        max_val = image_match(self.tem_icon_pokedex_path, self.reg_icon_pokedex, is_ocr=False)
+        if max_val >= self.match_thresh:
+            self.logger.debug(f"弹出宝可梦信息页，最大匹配度为{max_val}")
+            return True
+        else:
             return False
 
 
