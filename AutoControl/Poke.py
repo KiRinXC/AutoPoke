@@ -20,7 +20,7 @@ class Poke:
         self.turn_set = turn_set
 
         self.move_event = threading.Event()
-        self.move_event.set()
+
         self.quit_event = threading.Event()
 
         self.DTOptions = DetectOptions()
@@ -47,6 +47,7 @@ class Poke:
         self.poke_num,self.shiny_num = self.recode['poke_num'],self.recode['shiny_num']
 
         if self.move_set and self.turn_set:
+            self.move_event.set()
             self.MP = MovePlayer(self.move_event, self.move_set, self.turn_set)
             self.move_method = self.MP.move_method
             self.turn_method = self.MP.turn_method
@@ -100,9 +101,9 @@ class Poke:
             self.turn_method()
 
     def quit(self):
-        while not self.quit_event.is_set():
-            time.sleep(1)
-            if self.move_event.is_set():
+        if self.move_event.is_set():
+            while not self.quit_event.is_set():
+                time.sleep(1)
                 if not self.DTOptions.detect_location():
                     self.quit_event.set()
                     self.move_event.clear()

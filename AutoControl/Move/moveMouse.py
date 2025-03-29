@@ -102,7 +102,7 @@ class MoveMouse:
         pyautogui.mouseUp()
 
 
-    def random_mouse(self,pro=0.2):
+    def random_mouse(self,pro=0.5):
         """
         随机的鼠标移动
         :param pro: 点击后鼠标随机移动的概率

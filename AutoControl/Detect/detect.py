@@ -24,8 +24,6 @@ class Detect:
 
         self.reg_remind = self.RegDetect["reg_remind"]
         self.reg_remind_text = self.RegDetect["reg_remind_text"]
-        self.reg_alert_confirm = self.RegDetect["reg_alert_confirm"]
-        self.reg_remind_hooker = self.RegDetect["reg_remind_hooked"]
         self.reg_remind_passive_skill = self.RegDetect["reg_remind_passive_skill"]
 
         self.reg_icon_walking = self.RegDetect["reg_icon_walking"]

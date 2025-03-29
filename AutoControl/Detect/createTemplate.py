@@ -1,6 +1,6 @@
 import os
 import cv2
-from AutoControl.Utili.calculate.getRoot import get_root
+from AutoControl.Utili.filesys.getRoot import get_root
 from AutoControl.Detect.getImage import get_image
 def create_template(save_path,offset,ocr):
     """

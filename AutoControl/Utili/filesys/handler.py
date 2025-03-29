@@ -1,6 +1,6 @@
 import json
 import os
-from AutoControl.Utili.calculate.getRoot import get_root
+from AutoControl.Utili.filesys.getRoot import get_root
 import logging
 
 class Handler(object):
@@ -52,9 +52,7 @@ class Handler(object):
         # 然后再打开文件进行读取
         with open(record_path, 'r', encoding='utf-8') as f:
             poke_recode = json.load(f)
-            poke_num = poke_recode["poke_num"]
-            shiny_num = poke_recode["shiny_num"]
-        return poke_num,shiny_num
+        return poke_recode
 
     # 推送刷闪数据
     def upload_recode(self,file_name,poke_num,shiny_num):
@@ -67,7 +65,6 @@ class Handler(object):
     def get_template_path(self,file_name):
         template_path = os.path.join(self.template_dir, f"{file_name}.png")
         if not os.path.exists(template_path):
-            self.log.warning(f"{file_name}.png模板图片不存在")
             return None
         return template_path
 

@@ -7,7 +7,6 @@ from AutoControl.Move.behavior import BehaviorReminder,BehaviorToolBar
 class PokeA04(Poke):
     def __init__(self,recode):
         super().__init__(recode)
-        self.single = False
         self.threads.append(self.use_pp)
         self.DTReminder = DetectReminder()
         self.BEReminder = BehaviorReminder()
