@@ -3,7 +3,7 @@ import time
 from AutoControl.Poke import Poke
 from AutoControl.Detect.detect import DetectReminder
 from AutoControl.Move.behavior import BehaviorReminder,BehaviorToolBar
-
+"""群怪刷闪"""
 class PokeA04(Poke):
     def __init__(self,recode):
         super().__init__(recode)

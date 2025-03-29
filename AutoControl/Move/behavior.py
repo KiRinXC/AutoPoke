@@ -141,9 +141,12 @@ class BehaviorOptions(Behavior):
             self.item_move_without_check(bag_action, "背包", wait_1)
         self.item_move_with_after_check(self.DTOptions.detect_cancel, confirm_action, "确认键", wait_2)
 
-    def escape_move(self,wait_scope) ->None:
+    def escape_move(self,wait_scope,check=True) ->None:
         escape_action = self.confirm_method(self.MKOptions.escape_key, self.MMOptions.escape_mouse,item="逃跑")
-        self.item_move_with_after_check(self.DTOptions.detect_escape, escape_action, "逃跑", wait_scope)
+        if check:
+            self.item_move_with_after_check(self.DTOptions.detect_escape, escape_action, "逃跑", wait_scope)
+        else:
+            self.item_move_without_check(escape_action, "逃跑", wait_scope)
 
 
 class BehaviorToolBar(Behavior):
