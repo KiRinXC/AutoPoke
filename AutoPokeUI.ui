@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>642</width>
-    <height>623</height>
+    <width>577</width>
+    <height>501</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -29,7 +29,7 @@
       <enum>QTabWidget::TabShape::Rounded</enum>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>4</number>
      </property>
      <property name="iconSize">
       <size>
@@ -52,7 +52,7 @@
           <enum>QTabWidget::TabPosition::West</enum>
          </property>
          <property name="currentIndex">
-          <number>5</number>
+          <number>4</number>
          </property>
          <property name="iconSize">
           <size>
@@ -68,13 +68,13 @@
           <attribute name="title">
            <string/>
           </attribute>
-          <widget class="QWidget" name="">
+          <widget class="QWidget" name="layoutWidget">
            <property name="geometry">
             <rect>
-             <x>150</x>
+             <x>160</x>
              <y>20</y>
-             <width>231</width>
-             <height>211</height>
+             <width>155</width>
+             <height>152</height>
             </rect>
            </property>
            <layout class="QGridLayout" name="gridLayout">
@@ -1265,8 +1265,8 @@
           <widget class="QToolButton" name="toolButton_58">
            <property name="geometry">
             <rect>
-             <x>180</x>
-             <y>150</y>
+             <x>140</x>
+             <y>230</y>
              <width>200</width>
              <height>200</height>
             </rect>
@@ -1297,8 +1297,8 @@
           <widget class="QToolButton" name="toolButton_59">
            <property name="geometry">
             <rect>
-             <x>180</x>
-             <y>150</y>
+             <x>140</x>
+             <y>230</y>
              <width>200</width>
              <height>200</height>
             </rect>
@@ -1329,8 +1329,8 @@
           <widget class="QToolButton" name="toolButton_60">
            <property name="geometry">
             <rect>
-             <x>180</x>
-             <y>150</y>
+             <x>140</x>
+             <y>230</y>
              <width>200</width>
              <height>200</height>
             </rect>
