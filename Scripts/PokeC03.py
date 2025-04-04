@@ -2,7 +2,7 @@ from AutoControl.Detect.detect import DetectTarget
 from AutoControl.Move.behavior import BehaviorCatch
 from AutoControl.Poke import Poke
 """抓百变"""
-class PokeC01(Poke):
+class PokeC03(Poke):
     def __init__(self,recode,move_set,turn_set):
         super().__init__(recode,move_set,turn_set)
         self.catch_num = 0

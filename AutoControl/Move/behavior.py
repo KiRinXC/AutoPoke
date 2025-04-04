@@ -44,12 +44,10 @@ class Behavior:
         :param wait_scope:阻塞时间
         """
         time.sleep(gen_1d_accident(wait_scope, item=item))
-        while True:
-                action()
-                while detect():
-                    # 在执行action()之后再次检测
-                    action()
-                break
+        action()
+        while detect():
+            # 在执行action()之后再次检测
+            action()
 
 
     @staticmethod
@@ -61,9 +59,9 @@ class Behavior:
         :param item:移动项目的名称
         :param wait_scope:阻塞时间范围
         """
-        time.sleep(gen_1d_accident(wait_scope,item = item))
         while True:
             if detect():
+                time.sleep(gen_1d_accident(wait_scope, item=item))
                 action()
                 break
 
@@ -79,9 +77,9 @@ class Behavior:
         :param event :事件的线程
         :param wait_scope:阻塞时间
         """
-        time.sleep(gen_1d_accident(wait_scope, item=item))
         while True:
             if detect_start():
+                time.sleep(gen_1d_accident(wait_scope, item=item))
                 action()
                 if not detect_start():
                     event.clear()
@@ -116,7 +114,6 @@ class BehaviorOptions(Behavior):
         key_list = [self.MKOptions.battle_key,self.MKOptions.skill_1_key]
         mouse_list = [self.MMOptions.battle_mouse,self.MMOptions.skill_1_mouse]
         battle_action,skill_1_action = self.confirm_method_list(key_list,mouse_list,item = "一技能")
-
         self.item_move_with_after_check(self.DTOptions.detect_escape, battle_action, "对战", wait_1)
         self.item_move_with_after_check(self.DTOptions.detect_cancel, skill_1_action, "一技能", wait_2)
 
@@ -127,7 +124,7 @@ class BehaviorOptions(Behavior):
         if check:
             self.item_move_with_after_check(self.DTOptions.detect_escape, battle_action, "对战", wait_1)
         else:
-            self.item_move_without_check(battle_action, "对战", wait_1)
+            self.item_move_without_check(battle_action,"对战",wait_1)
         self.item_move_with_after_check(self.DTOptions.detect_cancel, skill_2_action, "二技能", wait_2)
 
 
@@ -177,7 +174,7 @@ class BehaviorToolBar(Behavior):
     def first_pokebar_move(self,wait_scope):
         self.logger.debug("鼠标-->首发精灵")
         first_pokebar_action = self.MMToolBar.first_pokebar_mouse
-        self.item_move_without_check(first_pokebar_action, "首发精灵", wait_scope)
+        self.item_move_with_after_check(self.DTOptions.detect_battled,first_pokebar_action, "首发精灵", wait_scope)
 
     def poke_props_move(self,wait_scope):
         self.logger.debug("鼠标-->取下道具")
@@ -213,9 +210,10 @@ class BehaviorReminder(Behavior):
 
     def individual_values_move(self,wait_scope):
         if random.random() < 0.5:
-            individual_values_action = self.confirm_method(self.MKReminder.individual_values_key,self.MMReminder.individual_values_mouse,"检查个体值")
+            key_list = [self.MKReminder.individual_values_key, self.MKReminder.poke_info_close_key]
+            mouse_list = [self.MMReminder.individual_values_mouse,self.MMReminder.poke_info_close_mouse]
+            individual_values_action, poke_info_close_action = self.confirm_method_list(key_list, mouse_list, item="检查个体值")
             self.item_move_with_after_check(self.DTIcon.detect_pokedex_icon, individual_values_action, "检查个体值", wait_scope)
-            poke_info_close_action = self.confirm_method(self.MKReminder.poke_info_close_key,self.MMReminder.poke_info_close_mouse,"关闭宝可梦信息框")
             self.item_move_without_check(poke_info_close_action,"关闭宝可梦信息框",wait_scope)
         else:
             poke_info_close_action = self.confirm_method(self.MKReminder.poke_info_close_key,self.MMReminder.poke_info_close_mouse,"关闭宝可梦信息框")
@@ -246,7 +244,7 @@ class BehaviorCatch(Behavior):
                 # 未脱离对战，也没有弹出选项框 则正在捕捉
                 pass
         # 捕捉成功后会弹出信息框
-        self.BEReminder.individual_values_move([0,1])
+        self.BEReminder.individual_values_move([0,0.1])
 
     def catch_middle_level_move(self):
         """不主动睡精灵"""
@@ -267,7 +265,7 @@ class BehaviorCatch(Behavior):
                 # 未脱离对战，也没有弹出选项框 则正在捕捉
                 pass
         # 捕捉成功后会弹出信息框
-        self.BEReminder.individual_values_move([0,1])
+        self.BEReminder.individual_values_move([0,0.1])
 
 
     def catch_high_level_move(self):
@@ -290,4 +288,4 @@ class BehaviorCatch(Behavior):
                 # 未脱离对战，也没有弹出选项框 则正在捕捉
                 pass
         # 捕捉成功后会弹出信息框
-        self.BEReminder.individual_values_move([0, 1])
+        self.BEReminder.individual_values_move([0, 0.1])

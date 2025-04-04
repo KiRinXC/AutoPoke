@@ -102,7 +102,7 @@ class MoveMouse:
         pyautogui.mouseUp()
 
 
-    def random_mouse(self,pro=0.5):
+    def random_mouse(self,pro):
         """
         随机的鼠标移动
         :param pro: 点击后鼠标随机移动的概率
@@ -112,10 +112,11 @@ class MoveMouse:
             x, y = gen_2d_uniform(self.reg_win)
             self.mouse_move(x,y)
 
-    def item_mouse(self,region):
+    def item_mouse(self,region,pro=0.5):
         """
         移动到指定的范围并点击
         :param region: 指定的范围
+        :param pro: 鼠标随机移动的可能性
         """
         # 范围框相对于游戏窗口的位置
         temp_x, temp_y = gen_2d_uniform(region)
@@ -124,7 +125,7 @@ class MoveMouse:
         self.mouse_move(x,y)
         self.mouse_click()
         # 点击后随机移动
-        self.random_mouse()
+        self.random_mouse(pro)
 
     def confirm_mouse(self):
         """
@@ -147,7 +148,7 @@ class MoveMouseOptions(MoveMouse):
         super().__init__()
 
     def battle_mouse(self) ->None:
-        self.item_mouse(self.reg_battle)
+        self.item_mouse(self.reg_battle,pro=0.1)
 
     def bag_mouse(self) ->None:
         self.item_mouse(self.reg_bag)
@@ -179,7 +180,7 @@ class MoveMouseToolBar(MoveMouse):
         self.item_mouse(self.reg_fish_rod_toolbar)
 
     def first_pokebar_mouse(self):
-        self.item_mouse(self.reg_first_pokebar)
+        self.item_mouse(self.reg_first_pokebar,pro=0.1)
 
     def poke_props_mouse(self):
         self.item_mouse(self.reg_poke_props)

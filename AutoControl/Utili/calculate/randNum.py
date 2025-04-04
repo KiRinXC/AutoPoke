@@ -37,10 +37,11 @@ def gen_1d_accident(scope, item = None):
     pro = random.random()
     if pro <= high_prob:
         result = gen_1d_uniform(scope)
+        log.debug(f"{item}事件触发极短阻塞,时长{result}")
     elif pro <= high_prob+mid_prob:
         result = gen_1d_uniform([scope[1], 10])
         log.info(f"{item}事件触发短时间挂机,时长{result}")
     else:
         result = gen_1d_uniform([10,90])
-        log.info(f"{item}事件触发长时间挂机,时长{result}")
+        log.error(f"{item}事件触发长时间挂机,时长{result}")
     return result
