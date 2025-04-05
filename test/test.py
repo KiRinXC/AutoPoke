@@ -1,3 +1,5 @@
-from AutoControl.Utili.control.screenShot import screen_shot
+import numpy as np
 
-screen_shot()
+points_num = 9  # 例如，points_num = 7
+t_values = np.linspace(0, 1, points_num)
+print(t_values)

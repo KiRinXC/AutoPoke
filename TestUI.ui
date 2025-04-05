@@ -33,7 +33,7 @@
       <enum>QTabWidget::TabShape::Rounded</enum>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>3</number>
      </property>
      <property name="iconSize">
       <size>
@@ -56,7 +56,7 @@
           <enum>QTabWidget::TabPosition::West</enum>
          </property>
          <property name="currentIndex">
-          <number>0</number>
+          <number>5</number>
          </property>
          <property name="iconSize">
           <size>
@@ -4133,7 +4133,7 @@
           <enum>QTabWidget::TabPosition::West</enum>
          </property>
          <property name="currentIndex">
-          <number>0</number>
+          <number>2</number>
          </property>
          <property name="iconSize">
           <size>
@@ -4699,6 +4699,25 @@
           <attribute name="title">
            <string/>
           </attribute>
+          <layout class="QHBoxLayout" name="horizontalLayout_59">
+           <item>
+            <widget class="QToolButton" name="toolButton_58">
+             <property name="text">
+              <string/>
+             </property>
+             <property name="icon">
+              <iconset>
+               <normaloff>assets/PNG/start.png</normaloff>assets/PNG/start.png</iconset>
+             </property>
+             <property name="iconSize">
+              <size>
+               <width>200</width>
+               <height>200</height>
+              </size>
+             </property>
+            </widget>
+           </item>
+          </layout>
          </widget>
         </widget>
        </item>
@@ -5362,7 +5381,7 @@
            </layout>
           </item>
           <item>
-           <layout class="QHBoxLayout" name="horizontalLayout_7" stretch="1,1,1,1,1,1,1,1,1">
+           <layout class="QHBoxLayout" name="horizontalLayout_7" stretch="1,1,1,1,1,1,1">
             <item>
              <spacer name="horizontalSpacer_23">
               <property name="orientation">
@@ -5390,7 +5409,7 @@
                </font>
               </property>
               <property name="text">
-               <string> 喵码 </string>
+               <string> 喵码提醒 </string>
               </property>
              </widget>
             </item>
@@ -5410,10 +5429,16 @@
             <item>
              <widget class="QLineEdit" name="lineEdit">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+               <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>100</width>
+                <height>0</height>
+               </size>
               </property>
               <property name="placeholderText">
                <string>请输入喵码</string>
@@ -5434,46 +5459,15 @@
              </spacer>
             </item>
             <item>
-             <widget class="QLabel" name="label_10">
+             <widget class="QPushButton" name="pushButton_10">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="font">
-               <font>
-                <pointsize>12</pointsize>
-               </font>
-              </property>
-              <property name="text">
-               <string>天数</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <spacer name="horizontalSpacer_21">
-              <property name="orientation">
-               <enum>Qt::Orientation::Horizontal</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>40</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-            <item>
-             <widget class="QLineEdit" name="lineEdit_2">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+               <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
               </property>
               <property name="text">
-               <string/>
+               <string>测试</string>
               </property>
              </widget>
             </item>

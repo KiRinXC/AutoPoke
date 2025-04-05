@@ -64,6 +64,28 @@ class MoveMouse:
         y = (1 - t) ** 3 * p0[1] + 3 * (1 - t) ** 2 * t * p1[1] + 3 * (1 - t) * t ** 2 * p2[1] + t ** 3 * p3[1]
         return x, y
 
+    def generate_bezier_points_random(self, p1, p2):
+        """
+        在两点之间生成贝塞尔曲线，并每隔一定距离采样点
+        :param p1: 起始点 (x1, y1)
+        :param p2: 结束点 (x2, y2)
+        :return: 采样点的列表 [(x, y), (x, y), ...]
+        """
+        random_randint = random.randint(-1000, 1000)
+        # 定义控制点（随机生成，确保曲线自然）
+        control1_x = p1[0] + random_randint
+        control1_y = p1[1] + random_randint
+        control2_x = p2[0] + random_randint
+        control2_y = p2[1] + random_randint
+
+        # 固定采样六个点
+        t_values = [0, 0.2, 0.4, 0.6, 0.8, 1]
+        points = []
+        for t in t_values:
+            x, y = self.bezier_curve(p1, (control1_x, control1_y), (control2_x, control2_y), p2, t)
+            points.append((x, y))
+        return points
+
     def generate_bezier_points(self,p1, p2):
         """
         在两点之间生成贝塞尔曲线，并每隔一定距离采样点
@@ -71,16 +93,18 @@ class MoveMouse:
         :param p2: 结束点 (x2, y2)
         :return: 采样点的列表 [(x, y), (x, y), ...]
         """
+        max_offset = max(abs(p1[0] - p2[0]), abs(p1[1] - p2[1]))
+        random_range = int(max_offset/25 +1)*25
+        random_randint= random.randint(-random_range, random_range)
         # 定义控制点（随机生成，确保曲线自然）
-        control1_x = p1[0] + random.randint(-1000, 1000)
-        control1_y = p1[1] + random.randint(-1000, 1000)
-        control2_x = p2[0] + random.randint(-1000, 1000)
-        control2_y = p2[1] + random.randint(-1000, 1000)
+        control1_x = p1[0] + random_randint
+        control1_y = p1[1] + random_randint
+        control2_x = p2[0] + random_randint
+        control2_y = p2[1] + random_randint
 
-        # 固定采样七个点，t 的取值范围为 [0, 0.2, 0.4, 0.6, 0.8, 1]
-        t_values = [0, 0.2, 0.4, 0.6, 0.8, 1]
         points = []
-
+        points_num = int(max_offset / 100) + 1
+        t_values = np.linspace(0, 1, points_num)
         for t in t_values:
             x, y = self.bezier_curve(p1, (control1_x, control1_y), (control2_x, control2_y), p2, t)
             points.append((x, y))
@@ -110,7 +134,14 @@ class MoveMouse:
         # 随机在窗口随机移动
         if random.random() <= pro:
             x, y = gen_2d_uniform(self.reg_win)
-            self.mouse_move(x,y)
+            # 示例坐标
+            p1 = pyautogui.position()  # 起始点
+            p2 = (x, y)  # 结束点
+            # 生成贝塞尔曲线上的采样点
+            sampled_points = self.generate_bezier_points_random(p1, p2)
+            for i in range(len(sampled_points)):
+                pyautogui.moveTo(sampled_points[i][0], sampled_points[i][1])
+
 
     def item_mouse(self,region,pro=0.5):
         """
