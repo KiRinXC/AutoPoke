@@ -15,6 +15,6 @@ class PokeA05(Poke):
             is_hooked = self.DTReminder.detect_hooked_remind()
             self.BEReminder.remind_move([0, 0.5])
             if is_hooked:
-                self.BEOptions.escape_move([4,6])
+                self.BEOptions.escape_move(True,[4,6])
                 self.poke_num+=1
                 self.detect_shiny()

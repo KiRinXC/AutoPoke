@@ -22,6 +22,12 @@
 # Poke = PokeM01("彩幽刮鱼鳞")
 # Poke.run()
 
+from Scripts.PokeM02 import PokeM02
+from AutoControl.Security.logging import setup_logging
+setup_logging()
+Poke = PokeM02("喵喵刮鳞聚宝")
+Poke.run()
+
 # from Scripts.PokeA02 import PokeA02
 # from AutoControl.Security.logging import setup_logging
 # setup_logging()
@@ -30,13 +36,13 @@
 # Poke = PokeA02("香水刷闪",move_set,turn_set)
 # Poke.run()
 
-from Scripts.PokeC02 import PokeC02
-from AutoControl.Security.logging import setup_logging
-setup_logging()
-move_set = {'direction': ['d', 'a'], 'is_specified': False}
-turn_set = {'direction': ['w', 's'], 'is_specified': True}
-Poke = PokeC02("抓公虫",move_set,turn_set)
-Poke.run()
+# from Scripts.PokeC02 import PokeC02
+# from AutoControl.Security.logging import setup_logging
+# setup_logging()
+# move_set = {'direction': ['d', 'a'], 'is_specified': False}
+# turn_set = {'direction': ['w', 's'], 'is_specified': True}
+# Poke = PokeC02("抓公虫",move_set,turn_set)
+# Poke.run()
 
 # from Scripts.PokeC03 import PokeC03
 # from AutoControl.Security.logging import setup_logging

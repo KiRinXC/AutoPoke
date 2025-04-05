@@ -138,7 +138,7 @@ class BehaviorOptions(Behavior):
             self.item_move_without_check(bag_action, "背包", wait_1)
         self.item_move_with_after_check(self.DTOptions.detect_cancel, confirm_action, "确认键", wait_2)
 
-    def escape_move(self,wait_scope,check=True) ->None:
+    def escape_move(self,check,wait_scope) ->None:
         escape_action = self.confirm_method(self.MKOptions.escape_key, self.MMOptions.escape_mouse,item="逃跑")
         if check:
             self.item_move_with_after_check(self.DTOptions.detect_escape, escape_action, "逃跑", wait_scope)
@@ -171,10 +171,13 @@ class BehaviorToolBar(Behavior):
         fish_rod_toolbar_action =self.confirm_method(self.MKToolBar.fish_rod_toolbar_key, self.MMToolBar.fish_rod_toolbar_mouse,"工具栏鱼竿")
         self.item_move_with_after_check(self.DTOptions.detect_battled, fish_rod_toolbar_action, "工具栏鱼竿", wait_scope)
 
-    def first_pokebar_move(self,wait_scope):
+    def first_pokebar_move(self,check,wait_scope) ->None:
         self.logger.debug("鼠标-->首发精灵")
         first_pokebar_action = self.MMToolBar.first_pokebar_mouse
-        self.item_move_with_after_check(self.DTOptions.detect_battled,first_pokebar_action, "首发精灵", wait_scope)
+        if check:
+            self.item_move_with_after_check(self.DTOptions.detect_battled,first_pokebar_action, "首发精灵", wait_scope)
+        else:
+            self.item_move_without_check(first_pokebar_action, "首发精灵", wait_scope)
 
     def poke_props_move(self,wait_scope):
         self.logger.debug("鼠标-->取下道具")

@@ -2,7 +2,7 @@ from AutoControl.Move.behavior import BehaviorToolBar, BehaviorReminder
 from AutoControl.Detect.detect import DetectTarget, DetectReminder, DetectIcon
 from AutoControl.Poke import Poke
 
-"""彩幽刮鳞片脚本"""
+"""彩幽刮鳞片"""
 class PokeM01(Poke):
     def __init__(self, recode):
         super().__init__(recode)
@@ -26,14 +26,14 @@ class PokeM01(Poke):
             if self.DTReminder.detect_passive_skill_remind():
                 if not self.DTTarget.detect_poke_shiny():
                     self.BEOptions.battle_skill_1_move([0, 0.2], [0, 0.2])
-                    self.BEToolBar.first_pokebar_move([0, 0.2])
+                    self.BEToolBar.first_pokebar_move(True,[0, 0.2])
                     self.BEToolBar.poke_props_move([0, 0.2])
                     self.catch_num += 1
                     break
                 else:
                     self.detect_shiny()
             elif self.DTOptions.detect_escape():
-                self.BEOptions.escape_move([0, 0.2], False)
+                self.BEOptions.escape_move(False,[0, 0.2])
                 self.detect_shiny()
                 break
             else:

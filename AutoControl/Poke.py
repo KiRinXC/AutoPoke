@@ -71,7 +71,7 @@ class Poke:
 
     def encounter(self):
         self.move_event.clear()
-        self.BEOptions.escape_move(wait_scope=[0, 0.2])
+        self.BEOptions.escape_move(True,[0, 0.2])
         self.poke_num += 1
         self.detect_shiny()
 

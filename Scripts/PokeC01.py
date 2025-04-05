@@ -25,7 +25,7 @@ class PokeC01(Poke):
             self.move_event.set()
             self.catch_num+=1
         else:
-            self.BEOptions.escape_move([0,0.1])
+            self.BEOptions.escape_move(True,[0,0.1])
             self.detect_shiny()
 
 

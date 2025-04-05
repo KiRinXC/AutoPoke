@@ -15,7 +15,7 @@ class PokeA04(Poke):
     def detect(self):
         while not self.quit_event.is_set():
             self.BEToolBar.sweet_scent_toolbar_move([0,0.2])
-            self.BEOptions.escape_move([0,0.5])
+            self.BEOptions.escape_move(True,[0,0.5])
             self.poke_num+=5
             self.detect_shiny()
 
