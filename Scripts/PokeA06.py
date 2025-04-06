@@ -21,7 +21,7 @@ class PokeA06(Poke):
             self.BEOptions.MKOptions.confirm_key()
             while True:
                 if self.DTReminder.detect_remind():
-                    self.BEReminder.remind_move([0,0.2])
+                    self.BEReminder.remind_move_only_key([0,0.2])
                 elif self.DTIcon.detect_hatchbox_close_icon():
                     self.hatch()
                     break

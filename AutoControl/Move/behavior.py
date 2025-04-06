@@ -193,6 +193,11 @@ class BehaviorReminder(Behavior):
         self.DTReminder = DetectReminder()
         self.DTIcon = DetectIcon()
 
+    def remind_move_only_key(self,wait_scope):
+        self.logger.debug("键盘-->提醒/警告框")
+        remind_action = self.MKReminder.remind_key
+        self.item_move_with_before_check(self.DTReminder.detect_remind,remind_action,"提醒框", wait_scope)
+
     def remind_move(self, wait_scope):
         remind_action = self.confirm_method(self.MKReminder.remind_key,self.MMReminder.remind_mouse,"提醒框")
         self.item_move_with_before_check(self.DTReminder.detect_remind, remind_action, "提醒框", wait_scope)
