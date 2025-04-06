@@ -29,7 +29,7 @@ class PokeA06(Poke):
                     pass
 
     def hatch(self):
-        self.BEHatch.hatch_start_move()
+        self.BEHatch.hatch_start_move([0,0.4])
         self.BEHatch.select_poke_move(self.coordinate,[0,0.1])
         self.update_coordinate()
         self.BEHatch.hatch_move([0,0.1])
