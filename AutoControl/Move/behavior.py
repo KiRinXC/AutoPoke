@@ -2,8 +2,8 @@ import random
 import logging
 import time
 
-from AutoControl.Move.moveKey import MoveKeyOptions,MoveKeyToolBar,MoveKeyReminder
-from AutoControl.Move.moveMouse import MoveMouseOptions,MoveMouseToolBar,MoveMouseReminder
+from AutoControl.Move.moveKey import MoveKeyOptions,MoveKeyToolBar,MoveKeyReminder,MoveKeyHatch
+from AutoControl.Move.moveMouse import MoveMouseOptions,MoveMouseToolBar,MoveMouseReminder,MoveMouseHatch
 from AutoControl.Detect.detect import DetectOptions, DetectReminder, DetectTarget, DetectIcon
 from AutoControl.Utili.calculate.randNum import gen_1d_accident
 from AutoControl.Utili.filesys.handler import Handler
@@ -222,6 +222,10 @@ class BehaviorReminder(Behavior):
             poke_info_close_action = self.confirm_method(self.MKReminder.poke_info_close_key,self.MMReminder.poke_info_close_mouse,"关闭宝可梦信息框")
             self.item_move_with_after_check(self.DTIcon.detect_pokedex_icon, poke_info_close_action, "关闭宝可梦信息框", wait_scope)
 
+    def hatch_alert_confirm_move(self,wait_scope):
+        hatch_alert_confirm_action = self.confirm_method(self.MKReminder.alert_confirm_key,self.MMReminder.hatch_alert_confirm_mouse,"确认孵蛋")
+        self.item_move_with_after_check(self.DTReminder.detect_alert_confirm_hatch, hatch_alert_confirm_action, "确认孵蛋", wait_scope)
+
 
 class BehaviorCatch(Behavior):
     def __init__(self):
@@ -292,3 +296,29 @@ class BehaviorCatch(Behavior):
                 pass
         # 捕捉成功后会弹出信息框
         self.BEReminder.individual_values_move([0, 0.1])
+
+
+class BehaviorHatch(Behavior):
+    def __init__(self):
+        super().__init__()
+        self.MMHatch = MoveMouseHatch()
+        self.MKHatch = MoveKeyHatch()
+        self.DTIcon = DetectIcon()
+
+    def hatch_start_move(self):
+        hatch_start_action = self.confirm_method(self.MKHatch.hatch_start_key,self.MMHatch.hatch_start_mouse,"开始孵蛋")
+        self.item_move_without_check(hatch_start_action(),"开始孵蛋",[0,0.4])
+
+    def select_poke_move(self,coordinate,wait_scope):
+        self.logger.debug("鼠标-->选择孵蛋精灵")
+        select_poke_action = self.MMHatch.select_poke_mouse
+        self.item_move_with_after_check(self.DTIcon.detect_computerbox_close_icon,select_poke_action(coordinate),"选择孵蛋精灵",wait_scope)
+
+    def hatch_move(self,wait_scope):
+        self.logger.debug("鼠标-->点击孵蛋")
+        hatch_action = self.MMHatch.hatch_mouse
+        self.item_move_with_after_check(self.DTIcon.detect_hatchbox_close_icon,hatch_action,"点击孵蛋",wait_scope)
+
+
+
+

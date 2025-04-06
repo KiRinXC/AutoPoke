@@ -124,6 +124,12 @@ class MoveKeyReminder(MoveKey):
     def poke_info_close_key(self):
         self.cancel_key()
 
+class MoveKeyHatch(MoveKey):
+    def __init__(self):
+        super().__init__()
+    def hatch_start_key(self):
+        self.confirm_key()
+
 
 
 

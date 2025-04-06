@@ -25,10 +25,14 @@ class Detect:
         self.reg_remind = self.RegDetect["reg_remind"]
         self.reg_remind_text = self.RegDetect["reg_remind_text"]
         self.reg_remind_passive_skill = self.RegDetect["reg_remind_passive_skill"]
+        self.reg_alert_confirm_hatch = self.RegDetect["reg_alert_confirm_hatch"]
+
 
         self.reg_icon_walking = self.RegDetect["reg_icon_walking"]
         self.reg_icon_props = self.RegDetect["reg_icon_props"]
         self.reg_icon_pokedex = self.RegDetect["reg_icon_pokedex"]
+        self.reg_icon_close_hatchbox = self.RegDetect["reg_icon_close_hatchbox"]
+        self.reg_icon_close_computerbox = self.RegDetect["reg_icon_close_computerbox"]
 
         self.tem_location_path = handler.get_template_path('location')
         self.tem_escape_path = handler.get_template_path('escape')
@@ -46,6 +50,7 @@ class Detect:
         self.tem_icon_walking_path = handler.get_template_path('icon_walking')
         self.tem_icon_props_path = handler.get_template_path('icon_props')
         self.tem_icon_pokedex_path = handler.get_template_path('icon_pokedex')
+        self.tem_icon_close_path = handler.get_template_path('icon_close')
 
         self.Settings = handler.download_json('Settings')
         self.match_thresh = self.Settings["match_thresh"]
@@ -261,6 +266,14 @@ class DetectReminder(Detect):
         else:
             return False
 
+    def detect_alert_confirm_hatch(self):
+        max_val = image_match(self.tem_alert_confirm_path,self.reg_alert_confirm_hatch,is_ocr=True)
+        if max_val >= self.match_thresh:
+            self.logger.debug(f"弹出警告框，最大匹配度{max_val}")
+            return True
+        else:
+            return False
+
 
 class DetectIcon(Detect):
     """
@@ -299,6 +312,28 @@ class DetectIcon(Detect):
         max_val = image_match(self.tem_icon_pokedex_path, self.reg_icon_pokedex, is_ocr=False)
         if max_val >= self.match_thresh:
             self.logger.debug(f"弹出宝可梦信息页，最大匹配度为{max_val}")
+            return True
+        else:
+            return False
+
+    def detect_hatchbox_close_icon(self):
+        """
+        检测孵蛋页关闭图标
+        """
+        max_val = image_match(self.tem_icon_close_path, self.reg_icon_close_hatchbox, is_ocr=False)
+        if max_val >= self.match_thresh:
+            self.logger.debug(f"弹出孵蛋页面{max_val}")
+            return True
+        else:
+            return False
+
+    def detect_computerbox_close_icon(self):
+        """
+        检测电脑箱子页关闭图标
+        """
+        max_val = image_match(self.tem_icon_close_path, self.reg_icon_close_computerbox, is_ocr=False)
+        if max_val >= self.match_thresh:
+            self.logger.debug(f"弹出电脑箱子{max_val}")
             return True
         else:
             return False
