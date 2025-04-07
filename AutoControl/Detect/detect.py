@@ -325,6 +325,7 @@ class DetectIcon(Detect):
             self.logger.debug(f"弹出孵蛋页面{max_val}")
             return True
         else:
+            self.logger.debug(f"未弹出孵蛋页面{max_val}")
             return False
 
     def detect_computerbox_close_icon(self):

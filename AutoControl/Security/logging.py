@@ -12,7 +12,7 @@ def setup_logging():
     log_file = os.path.join(log_dir, 'AutoPoke.log')
     # 创建一个全局日志器
     logger = logging.getLogger()
-    logger.setLevel(logging.INFO)  # 设置全局日志级别
+    logger.setLevel(logging.DEBUG)  # 设置全局日志级别
 
     # 日志格式
     formatter = logging.Formatter(

@@ -96,7 +96,7 @@ class MovePlayer:
                 if move_count == 1:
                     move_len = gen_1d_uniform([move_len - 0.5, move_len])
                 else:
-                    move_len = gen_1d_uniform(self.move_range) + 0.5
+                    move_len = gen_1d_uniform(self.move_range) + 1
 
     def orderly_turn_default(self) -> None:
         """
@@ -126,5 +126,5 @@ class MovePlayer:
                 if turn_count == 1:
                     turn_len = gen_1d_uniform([turn_len - 0.05, turn_len])
                 else:
-                    turn_len = gen_1d_uniform(self.turn_range) + 0.05
+                    turn_len = gen_1d_uniform(self.turn_range) + 0.1
                 time.sleep(gen_1d_uniform([0.5, 1]))
