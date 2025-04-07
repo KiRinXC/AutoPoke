@@ -238,6 +238,7 @@ class BehaviorCatch(Behavior):
         self.handler = Handler()
         self.DTTarget = DetectTarget()
         self.DTTarget.tem_poke_status_path = self.handler.get_template_path('poke_status_sleep')
+        self.DTIcon = DetectIcon()
         self.BEOptions = BehaviorOptions()
         self.BEReminder = BehaviorReminder()
 
@@ -246,24 +247,28 @@ class BehaviorCatch(Behavior):
         self.BEOptions.battle_skill_1_move([0,0.1],[0,0.1])
         self.BEOptions.bag_pokeball_move(True,[0, 0.1], [0, 0.1])
         while True:
-            if self.BEOptions.DTOptions.detect_battled():
+            if self.DTIcon.detect_pokedex_icon():
+                # 捕捉成功后会弹出信息框
+                self.BEReminder.individual_values_move([0, 0.1])
                 # 判断是否脱离对战
                 break
             elif self.BEOptions.DTOptions.detect_escape():
                 # 未脱离对战 则看有没有弹出选项框
                 self.BEOptions.bag_pokeball_move(False,[0, 0.1], [0, 0.1])
             else:
-                # 未脱离对战，也没有弹出选项框 则正在捕捉
+                # 未弹出宝可梦信息页面，也没有弹出选项框 则正在捕捉
                 pass
-        # 捕捉成功后会弹出信息框
-        self.BEReminder.individual_values_move([0,0.1])
+
+
 
     def catch_middle_level_move(self):
         """不主动睡精灵"""
         self.BEOptions.battle_skill_1_move([0,0.1],[0,0.1])
         self.BEOptions.bag_pokeball_move(True,[0, 0.1], [0, 0.1])
         while True:
-            if self.BEOptions.DTOptions.detect_battled():
+            if self.DTIcon.detect_pokedex_icon():
+                # 捕捉成功后会弹出信息框
+                self.BEReminder.individual_values_move([0, 0.1])
                 # 判断是否脱离对战
                 break
             elif self.BEOptions.DTOptions.detect_escape():
@@ -286,7 +291,9 @@ class BehaviorCatch(Behavior):
         self.BEOptions.battle_skill_2_move(True,[0, 0.1], [0, 0.1])
         self.BEOptions.bag_pokeball_move(True, [0, 0.1], [0, 0.1])
         while True:
-            if self.BEOptions.DTOptions.detect_battled():
+            if self.DTIcon.detect_pokedex_icon():
+                # 捕捉成功后会弹出信息框
+                self.BEReminder.individual_values_move([0, 0.1])
                 # 判断是否脱离对战
                 break
             elif self.BEOptions.DTOptions.detect_escape():
@@ -314,14 +321,23 @@ class BehaviorHatch(Behavior):
         hatch_start_action = self.confirm_method(self.MKHatch.hatch_start_key,self.MMHatch.hatch_start_mouse,"开始孵蛋")
         self.item_move_without_check(hatch_start_action,"开始孵蛋",wait_scope)
 
+    def select_poke_male_move(self, coordinate,wait_scope):
+        self.logger.debug("鼠标-->选择公素材")
+        time.sleep(gen_1d_accident(wait_scope, item="选择公素材"))
+        self.MMHatch.select_poke_male_mouse(coordinate)
+
+    def select_poke_female_move(self, coordinate,wait_scope):
+        self.logger.debug("鼠标-->选择母素材")
+        time.sleep(gen_1d_accident(wait_scope, item="选择母素材"))
+        self.MMHatch.select_poke_female_mouse(coordinate)
+
     def select_poke_move(self,coordinate,wait_scope):
-        self.logger.debug("鼠标-->选择孵蛋精灵")
-        select_poke_action = self.MMHatch.select_poke_mouse
         while True:
             if self.DTIcon.detect_computerbox_close_icon():
-                time.sleep(gen_1d_accident(wait_scope, item="选择孵蛋精灵"))
-                select_poke_action(coordinate)
+                self.select_poke_male_move(coordinate,wait_scope)
+                self.select_poke_female_move(coordinate,wait_scope)
                 break
+
 
     def hatch_move(self,wait_scope):
         self.logger.debug("鼠标-->点击孵蛋")

@@ -183,10 +183,10 @@ class MoveMouseOptions(MoveMouse):
         super().__init__()
 
     def battle_mouse(self) -> None:
-        self.item_mouse(self.reg_battle, pro=0)
+        self.item_mouse(self.reg_battle, pro=0.01)
 
     def bag_mouse(self) -> None:
-        self.item_mouse(self.reg_bag)
+        self.item_mouse(self.reg_bag,pro=0.01)
 
     def escape_mouse(self) -> None:
         self.item_mouse(self.reg_escape)
@@ -215,7 +215,7 @@ class MoveMouseToolBar(MoveMouse):
         self.item_mouse(self.reg_fish_rod_toolbar)
 
     def first_pokebar_mouse(self):
-        self.item_mouse(self.reg_first_pokebar, pro=0)
+        self.item_mouse(self.reg_first_pokebar, pro=0.01)
 
     def poke_props_mouse(self):
         self.item_mouse(self.reg_poke_props)
@@ -236,7 +236,7 @@ class MoveMouseReminder(MoveMouse):
         self.item_mouse(self.reg_pp_confirm)
 
     def individual_values_mouse(self):
-        self.item_mouse(self.reg_individual_values)
+        self.item_mouse(self.reg_individual_values,pro=0.01)
 
     def poke_info_close_mouse(self):
         self.item_mouse(self.reg_poke_info_close)
@@ -253,28 +253,32 @@ class MoveMouseHatch(MoveMouse):
     def hatch_start_mouse(self):
         self.item_mouse(self.reg_hatch_start)
 
-    def select_poke_mouse(self, coordinate):
+    def select_poke_male_mouse(self, coordinate):
         reg_select_poke_male = [0,0,0,0]
         reg_select_poke_male[0] = self.reg_select_poke_base[0] + coordinate[1] * self.colum_spacing
         reg_select_poke_male[1] = self.reg_select_poke_base[1] + coordinate[0] * self.row_spacing
         reg_select_poke_male[2] = self.reg_select_poke_base[2]
         reg_select_poke_male[3] = self.reg_select_poke_base[3]
         pyautogui.keyDown('ctrl')
-        self.item_mouse(reg_select_poke_male)
+        self.item_mouse(reg_select_poke_male,pro=0.01)
         pyautogui.keyUp('ctrl')
-        time.sleep(0.2)
+
+
+
+    def select_poke_female_mouse(self, coordinate):
         reg_select_poke_female = [0,0,0,0]
-        reg_select_poke_female[0] = reg_select_poke_male[0]
-        reg_select_poke_female[1] = reg_select_poke_male[1] + 3*self.row_spacing
-        reg_select_poke_female[2] = reg_select_poke_male[2]
-        reg_select_poke_female[3] = reg_select_poke_male[3]
+        reg_select_poke_female[0] = self.reg_select_poke_base[0] + coordinate[1] * self.colum_spacing
+        reg_select_poke_female[1] = self.reg_select_poke_base[1] + coordinate[0] * self.row_spacing + 3*self.row_spacing
+        reg_select_poke_female[2] = self.reg_select_poke_base[2]
+        reg_select_poke_female[3] = self.reg_select_poke_base[3]
 
         pyautogui.keyDown('ctrl')
-        self.item_mouse(reg_select_poke_female)
+        self.item_mouse(reg_select_poke_female,pro=0.01)
         pyautogui.keyUp('ctrl')
 
+
     def hatch_mouse(self):
-        self.item_mouse(self.reg_hatch)
+        self.item_mouse(self.reg_hatch,pro=0.01)
 
 
 

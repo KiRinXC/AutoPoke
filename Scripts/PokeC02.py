@@ -23,7 +23,7 @@ class PokeC02(Poke):
     def catch(self):
         status_list = self.DTTarget.detect_target()
         if status_list[0] or (status_list[1] and status_list[2]):
-            self.BECatch.catch_middle_level_move()
+            self.BECatch.catch_low_level_move()
             self.move_event.set()
             self.catch_num+=1
         else:
