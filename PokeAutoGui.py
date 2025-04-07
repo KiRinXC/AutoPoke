@@ -71,14 +71,18 @@
 # Poke.run()
 
 
-from Scripts.PokeA04 import PokeA04
-from AutoControl.Security.logging import setup_logging
-setup_logging()
-Poke = PokeA04("群怪刷闪")
-Poke.run()
-
-# from Scripts.PokeA06 import PokeA06
+# from Scripts.PokeA04 import PokeA04
 # from AutoControl.Security.logging import setup_logging
 # setup_logging()
-# Poke = PokeA06("孵蛋")
+# Poke = PokeA04("群怪刷闪")
 # Poke.run()
+
+
+from Scripts.PokeA06 import PokeA06
+from AutoControl.Security.encoder import Encoder
+from AutoControl.Security.logging import setup_logging
+encoder = Encoder("Hatching-Eggs-Keys", "SA06")
+client_key, server_key, _ = encoder.run()
+setup_logging()
+Poke = PokeA06("孵蛋")
+Poke.run()
