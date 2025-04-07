@@ -42,6 +42,7 @@ class MoveMouse:
         self.reg_hatch_start = self.RegMouse['reg_hatch_start']
         self.reg_select_poke_base = self.RegMouse['reg_select_poke_base']
         self.reg_hatch = self.RegMouse['reg_hatch']
+        self.reg_switch_box_base = self.RegMouse['reg_switch_box_base']
 
     @staticmethod
     def loc_add(p1, p2):
@@ -161,6 +162,30 @@ class MoveMouse:
         # 点击后随机移动
         self.random_mouse(pro)
 
+    def item_drag(self,region_s,region_d):
+        """
+        拖动到指定的范围
+        :param region_s: 源范围
+        :param region_d:目的范围
+        """
+        # 源范围框相对于游戏窗口的位置
+        temp_x_s, temp_y_s = gen_2d_uniform(region_s)
+        # 源范围框的真实位置
+        x_s, y_s = self.loc_add([temp_x_s, temp_y_s], [self.reg_win[0], self.reg_win[1]])
+
+        # 目标范围框相对于游戏窗口的位置
+        temp_x_d, temp_y_d = gen_2d_uniform(region_d)
+        # 目标范围框的真实位置
+        x_d, y_d = self.loc_add([temp_x_d, temp_y_d], [self.reg_win[0], self.reg_win[1]])
+
+        self.mouse_move(x_s, y_s)
+        sampled_points = self.generate_bezier_points((x_s,y_s), (x_d,y_d))
+        pyautogui.mouseDown()
+        for i in range(len(sampled_points)):
+            pyautogui.moveTo(sampled_points[i][0], sampled_points[i][1],duration=0.2)
+        pyautogui.mouseUp()
+
+
     def confirm_mouse(self):
         """
         确认框的移动点击
@@ -249,6 +274,7 @@ class MoveMouseHatch(MoveMouse):
         super().__init__()
         self.colum_spacing = 63
         self.row_spacing = 53
+        self.box_spacing = 60
 
     def hatch_start_mouse(self):
         self.item_mouse(self.reg_hatch_start)
@@ -279,6 +305,15 @@ class MoveMouseHatch(MoveMouse):
 
     def hatch_mouse(self):
         self.item_mouse(self.reg_hatch,pro=0.01)
+
+    def switch_box_mouse(self,box_num):
+        reg_switch_box = [i for i in self.reg_switch_box_base]
+        print(self.reg_switch_box_base)
+        reg_switch_box[0] = reg_switch_box[0] + (box_num-1)*self.box_spacing
+        print(reg_switch_box,self.reg_switch_box_base)
+        self.item_drag(reg_switch_box,self.reg_switch_box_base)
+
+
 
 
 

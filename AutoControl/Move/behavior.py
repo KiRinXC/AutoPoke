@@ -344,6 +344,15 @@ class BehaviorHatch(Behavior):
         hatch_action = self.MMHatch.hatch_mouse
         self.item_move_with_after_check(self.DTIcon.detect_hatchbox_close_icon,hatch_action,"点击孵蛋",wait_scope)
 
+    def switch_box_move(self, box_num, wait_scope):
+        self.logger.debug("键盘-->切换箱子")
+        time.sleep(gen_1d_accident(wait_scope, item="切换箱子"))
+        while True:
+            if self.DTIcon.detect_computerbox_close_icon():
+                self.MMHatch.switch_box_mouse(box_num)
+                break
+
+
 
 
 
