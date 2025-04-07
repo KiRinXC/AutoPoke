@@ -13,11 +13,11 @@ class PokeA06(Poke):
         self.DTIcon = DetectIcon()
         self.BEReminder = BehaviorReminder()
         self.BEHatch = BehaviorHatch()
-        self.coordinate = [0,1]
+        self.coordinate = [0,0]
         self.poke_counter = 0
 
     def detect(self):
-        while self.poke_counter < 30:
+        while self.poke_counter < 12:
             self.BEOptions.MKOptions.confirm_key()
             while True:
                 if self.DTReminder.detect_remind():
@@ -31,9 +31,7 @@ class PokeA06(Poke):
     def hatch(self):
         self.BEHatch.hatch_start_move([0,0.4])
         self.BEHatch.select_poke_move(self.coordinate,[0,0.1])
-        print(f"/n{self.coordinate}/n")
         self.update_coordinate()
-        print(f"/n{self.coordinate}/n")
         self.BEHatch.hatch_move([0,0.1])
         self.BEReminder.hatch_alert_confirm_move([0,0.1])
 

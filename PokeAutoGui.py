@@ -44,22 +44,23 @@
 # turn_set = {'direction': ['d', 'a'], 'is_specified': True}
 # Poke = PokeA02("香水刷闪",move_set,turn_set)
 # Poke.run()
-
+#
 # from Scripts.PokeC02 import PokeC02
 # from AutoControl.Security.logging import setup_logging
+#
 # setup_logging()
-# move_set = {'direction': ['w', 's'], 'is_specified': False}
+# move_set = {'direction': ['s', 'w'], 'is_specified': True}
 # turn_set = {'direction': ['d', 'a'], 'is_specified': True}
-# Poke = PokeC02("抓公虫",move_set,turn_set)
+# Poke = PokeC02("抓公虫", move_set, turn_set)
 # Poke.run()
 
-from Scripts.PokeC01 import PokeC01
-from AutoControl.Security.logging import setup_logging
-setup_logging()
-move_set = {'direction': ['w', 's'], 'is_specified': True}
-turn_set = {'direction': ['d', 'a'], 'is_specified': True}
-Poke = PokeC01("抓蘑菇",move_set,turn_set)
-Poke.run()
+# from Scripts.PokeC01 import PokeC01
+# from AutoControl.Security.logging import setup_logging
+# setup_logging()
+# move_set = {'direction': ['w', 's'], 'is_specified': True}
+# turn_set = {'direction': ['d', 'a'], 'is_specified':True}
+# Poke = PokeC01("抓蘑菇",move_set,turn_set)
+# Poke.run()
 
 # from Scripts.PokeC03 import PokeC03
 # from AutoControl.Security.logging import setup_logging
@@ -69,16 +70,15 @@ Poke.run()
 # Poke = PokeC03("抓百变",move_set,turn_set)
 # Poke.run()
 
-#
-# from Scripts.PokeA04 import PokeA04
-# from AutoControl.Security.logging import setup_logging
-# setup_logging()
-# Poke = PokeA04("群怪刷闪")
-# Poke.run()
+
+from Scripts.PokeA04 import PokeA04
+from AutoControl.Security.logging import setup_logging
+setup_logging()
+Poke = PokeA04("群怪刷闪")
+Poke.run()
 
 # from Scripts.PokeA06 import PokeA06
 # from AutoControl.Security.logging import setup_logging
 # setup_logging()
 # Poke = PokeA06("孵蛋")
 # Poke.run()
-
