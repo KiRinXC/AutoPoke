@@ -281,8 +281,7 @@ class BehaviorCatch(Behavior):
             else:
                 # 未脱离对战，也没有弹出选项框 则正在捕捉
                 pass
-        # 捕捉成功后会弹出信息框
-        self.BEReminder.individual_values_move([0,0.1])
+
 
 
     def catch_high_level_move(self):
@@ -306,8 +305,6 @@ class BehaviorCatch(Behavior):
             else:
                 # 未脱离对战，也没有弹出选项框 则正在捕捉
                 pass
-        # 捕捉成功后会弹出信息框
-        self.BEReminder.individual_values_move([0, 0.1])
 
 
 class BehaviorHatch(Behavior):
