@@ -124,7 +124,7 @@ class MovePlayer:
                 self.logger.debug("拐弯->" + self.turn_direction[turn_count] + "移动" + str(turn_len))
                 turn_count = (turn_count + 1) % 2
                 if turn_count == 1:
-                    turn_len = gen_1d_uniform([turn_len - 0.05, turn_len])
+                    turn_len = gen_1d_uniform([turn_len - 0.5, turn_len])
                 else:
-                    turn_len = gen_1d_uniform(self.turn_range) + 0.1
+                    turn_len = gen_1d_uniform(self.turn_range) + 0.5
                 time.sleep(gen_1d_uniform([0.5, 1]))

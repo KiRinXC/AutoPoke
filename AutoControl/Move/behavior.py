@@ -65,6 +65,22 @@ class Behavior:
                 action()
                 break
 
+    @staticmethod
+    def item_move_multiple_check(detect_start,detect_exit, action, item, wait_scope):
+        """
+        既要检测是否触发行为，又要检测是否行为执行有效
+        :param detect_start: 触发行为的检测函数
+        :param detect_exit: 结束行为的检测函数
+        :param action: 执行行为
+        :param item: 移动项目的名称
+        :param wait_scope: 阻塞时间
+        """
+        while True:
+            if detect_start():
+                time.sleep(gen_1d_accident(wait_scope, item=item))
+                action()
+                if not detect_exit():
+                    break
 
     @staticmethod
     def item_move_multiple_check_with_event(detect_start, detect_exit, action, item, event, wait_scope):
@@ -89,6 +105,9 @@ class Behavior:
                 break
             else:
                 pass
+
+
+
 
     @staticmethod
     def item_move_without_check(action, item,wait_scope):
@@ -313,6 +332,7 @@ class BehaviorHatch(Behavior):
         self.MMHatch = MoveMouseHatch()
         self.MKHatch = MoveKeyHatch()
         self.DTIcon = DetectIcon()
+        self.DTReminder=DetectReminder()
 
     def hatch_start_move(self,wait_scope):
         hatch_start_action = self.confirm_method(self.MKHatch.hatch_start_key,self.MMHatch.hatch_start_mouse,"开始孵蛋")
@@ -339,7 +359,7 @@ class BehaviorHatch(Behavior):
     def hatch_move(self,wait_scope):
         self.logger.debug("鼠标-->点击孵蛋")
         hatch_action = self.MMHatch.hatch_mouse
-        self.item_move_with_after_check(self.DTIcon.detect_hatchbox_close_icon,hatch_action,"点击孵蛋",wait_scope)
+        self.item_move_multiple_check(self.DTIcon.detect_hatchbox_close_icon,self.DTReminder.detect_alert_confirm_hatch,hatch_action,"点击孵蛋",wait_scope)
 
     def switch_box_move(self, box_num, wait_scope):
         self.logger.debug("键盘-->切换箱子")

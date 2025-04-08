@@ -14,7 +14,7 @@ class PokeA06(Poke):
         self.BEHatch = BehaviorHatch()
         self.coordinate = [0,0]
         self.poke_counter = 0
-        self.max_poke_num_a_box = 2
+        self.max_poke_num_a_box = 30
         self.max_box_num = int(input("请输入孵蛋箱子数量："))
 
     def detect(self):
