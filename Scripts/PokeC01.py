@@ -20,13 +20,14 @@ class PokeC01(Poke):
         self.threads.append(self.catch)
 
     def encounter(self):
-        self.move_event.clear()
+        self.move_event.wait()
         status_list = self.DTTarget.detect_target()
         if status_list[0] or not status_list[1]:
             self.catch_event.set()
         else:
             self.BEOptions.escape_move(True, [0, 0.1])
             self.detect_shiny()
+        self.detect_event.wait()
         self.poke_num += 1
 
     def catch(self):
@@ -35,8 +36,9 @@ class PokeC01(Poke):
                 self.BECatch.catch_low_level_move()
                 self.catch_event.clear()
                 self.move_event.set()
+                self.detect_event.set()
                 self.catch_num += 1
-                time.sleep(10)
+            time.sleep(1)
 
 
 

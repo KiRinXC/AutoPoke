@@ -19,6 +19,9 @@ class Poke:
         self.move_set = move_set
         self.turn_set = turn_set
 
+        self.detect_event = threading.Event()
+        self.detect_event.set()
+
         self.move_event = threading.Event()
 
         self.quit_event = threading.Event()
@@ -58,8 +61,8 @@ class Poke:
 
     def detect(self):
         while not self.quit_event.is_set():
-            if self.DTOptions.detect_encounter():
-                self.move_event.clear()
+            if self.detect_event.is_set() and self.DTOptions.detect_encounter():
+                self.move_event.wait()
                 time.sleep(1)
                 # 需要二次判定
                 if self.DTOptions.detect_battle():
@@ -70,7 +73,7 @@ class Poke:
 
 
     def encounter(self):
-        self.move_event.clear()
+        self.move_event.wait()
         self.BEOptions.escape_move(True,[0, 0.2])
         self.poke_num += 1
         self.detect_shiny()

@@ -14,7 +14,7 @@ class PokeA03(Poke):
     def use_spray(self):
         while not self.quit_event.is_set():
             if self.DTReminder.detect_remind():
-                self.move_event.clear()
+                self.move_event.wait()
                 self.BEReminder.alert_confirm_move([0,0.1])
                 while True:
                     if self.DTOptions.detect_battled():
