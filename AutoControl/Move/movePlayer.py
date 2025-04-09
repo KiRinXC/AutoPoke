@@ -52,7 +52,6 @@ class MovePlayer:
                 block_time = gen_1d_accident([0, 0], item="角色移动")
                 if block_time > 0:
                     self.move_event.clear()
-                    self.logger.debug(f"角色移动事件阻塞，时长{block_time}")
                     time.sleep(block_time)
                     DTOptions = DetectOptions()
                     while True:
