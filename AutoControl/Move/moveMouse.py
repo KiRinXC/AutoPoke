@@ -308,9 +308,7 @@ class MoveMouseHatch(MoveMouse):
 
     def switch_box_mouse(self,box_num):
         reg_switch_box = [i for i in self.reg_switch_box_base]
-        print(self.reg_switch_box_base)
         reg_switch_box[0] = reg_switch_box[0] + (box_num-1)*self.box_spacing
-        print(reg_switch_box,self.reg_switch_box_base)
         self.item_drag(reg_switch_box,self.reg_switch_box_base)
 
 

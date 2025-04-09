@@ -79,7 +79,7 @@ class Behavior:
             if detect_start():
                 time.sleep(gen_1d_accident(wait_scope, item=item))
                 action()
-                if not detect_exit():
+                if detect_exit():
                     break
 
     @staticmethod

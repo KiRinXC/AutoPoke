@@ -72,25 +72,25 @@
 # Poke = PokeC02("抓公虫", move_set, turn_set)
 # Poke.run()
 
-from Scripts.PokeC01 import PokeC01
-from AutoControl.Security.logging import setup_logging
-setup_logging()
-move_set = {'direction': ['w', 's'], 'is_specified': True}
-turn_set = {'direction': ['d', 'a'], 'is_specified':False}
-Poke = PokeC01("抓蘑菇",move_set,turn_set)
-Poke.run()
+# from Scripts.PokeC01 import PokeC01
+# from AutoControl.Security.logging import setup_logging
+# setup_logging()
+# move_set = {'direction': ['w', 's'], 'is_specified': True}
+# turn_set = {'direction': ['d', 'a'], 'is_specified':False}
+# Poke = PokeC01("抓蘑菇",move_set,turn_set)
+# Poke.run()
 
-from Scripts.PokeC03 import PokeC03
-from AutoControl.Security.logging import setup_logging
-# from AutoControl.Security.encoder import Encoder
-setup_logging()
-# encoder = Encoder("Ditto-Keys", "SC03")
-# client_key, server_key, _ = encoder.run()
-move_set = {'direction': ['d', 'a'], 'is_specified': False}
-turn_set = {'direction': ['w', 's'], 'is_specified': False}
-Poke = PokeC03("抓百变",move_set,turn_set)
-Poke.threads.remove(Poke.turn)
-Poke.run()
+# from Scripts.PokeC03 import PokeC03
+# from AutoControl.Security.logging import setup_logging
+# # from AutoControl.Security.encoder import Encoder
+# setup_logging()
+# # encoder = Encoder("Ditto-Keys", "SC03")
+# # client_key, server_key, _ = encoder.run()
+# move_set = {'direction': ['d', 'a'], 'is_specified': False}
+# turn_set = {'direction': ['w', 's'], 'is_specified': False}
+# Poke = PokeC03("抓百变",move_set,turn_set)
+# Poke.threads.remove(Poke.turn)
+# Poke.run()
 
 # from Scripts.PokeA04 import PokeA04
 # from AutoControl.Security.logging import setup_logging
@@ -102,11 +102,11 @@ Poke.run()
 # Poke.run()
 
 
-# from Scripts.PokeA06 import PokeA06
+from Scripts.PokeA06 import PokeA06
 # from AutoControl.Security.encoder import Encoder
-# from AutoControl.Security.logging import setup_logging
+from AutoControl.Security.logging import setup_logging
 # encoder = Encoder("Hatching-Eggs-Keys", "SA06")
 # client_key, server_key, _ = encoder.run()
-# setup_logging()
-# Poke = PokeA06("孵蛋")
-# Poke.run()
+setup_logging()
+Poke = PokeA06("孵蛋")
+Poke.run()
