@@ -1,0 +1,44 @@
+<RCC>
+  <qresource prefix="Menu">
+    <file>PNG/crown.png</file>
+    <file>PNG/game.png</file>
+    <file>PNG/gear.png</file>
+    <file>PNG/mega-ball.png</file>
+    <file>PNG/nature.png</file>
+    <file>PNG/pokecoin.png</file>
+  </qresource>
+  <qresource prefix="A">
+    <file>PNG/egg.png</file>
+    <file>PNG/fish.png</file>
+    <file>PNG/mew.png</file>
+    <file>PNG/pokeballs.png</file>
+    <file>PNG/psyduck.png</file>
+    <file>PNG/snorlax.png</file>
+  </qresource>
+  <qresource prefix="C">
+    <file>PNG/avatar.png</file>
+    <file>PNG/pokemon.png</file>
+    <file>PNG/weedle.png</file>
+  </qresource>
+  <qresource prefix="M">
+    <file>PNG/instinct.png</file>
+    <file>PNG/meowth.png</file>
+    <file>PNG/money-bag.png</file>
+  </qresource>
+  <qresource prefix="Move">
+    <file>PNG/bottom.png</file>
+    <file>PNG/left.png</file>
+    <file>PNG/left-bottom.png</file>
+    <file>PNG/left-top.png</file>
+    <file>PNG/right.png</file>
+    <file>PNG/right-bottom.png</file>
+    <file>PNG/right-tip.png</file>
+    <file>PNG/start.png</file>
+    <file>PNG/top.png</file>
+  </qresource>
+  <qresource prefix="Tips">
+    <file>PNG/Reset.png</file>
+    <file>PNG/gotcha.png</file>
+    <file>PNG/111.png</file>
+  </qresource>
+</RCC>

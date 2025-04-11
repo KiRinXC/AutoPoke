@@ -127,27 +127,32 @@ class Encoder:
             return current_key
         else:
             self.logger.error("客户端密钥验证失败")
-            exit(1)
+            return False
 
-
-    def generate_server_key(self,client_key,password):
+    def generate_server_key(self, client_key, duration, app_type):
         """生成服务端密钥"""
-        machine_code_encode = self.aes_decrypt(client_key,password)
-        self.logger.info(f"machine_code_encode is {machine_code_encode}")
-        date =self.get_current_date_in_format()
-        password_encode = self.md5_encrypt(password+machine_code_encode)
-        return self.aes_encrypt(date,password_encode)
+        machine_code_encode = self.aes_decrypt(client_key, self.password)
+        date = self.get_current_date_in_format()
+        password_encode = self.md5_encrypt(self.password + machine_code_encode)
 
-    def verify_server_key(self,client_key,server_key):
-        """从客户端密钥中得到起始日期"""
+        # 将激活日期、使用时长和应用程序类型拼接为一个字符串
+        info = f"{date},{duration},{app_type}"
+
+        return self.aes_encrypt(info, password_encode)
+
+    def verify_server_key(self, client_key, server_key):
+        """从客户端密钥中得到起始日期、使用时长和应用程序类型"""
         machine_code_encode = self.verify_client_key(client_key)
-        password_encode = self.md5_encrypt(self.password+machine_code_encode)
-        start_date = self.aes_decrypt(server_key,password_encode)
-        if start_date is not None:
-            return start_date
-        else:
-            self.logger.error("服务端密钥验证失败")
-            exit(1)
+        password_encode = self.md5_encrypt(self.password + machine_code_encode)
+        try:
+            # 解密服务端密钥
+            info = self.aes_decrypt(server_key, password_encode)
+            # 解析激活日期、使用时长和应用程序类型
+            start_date, duration, app_type = info.split(",")
+            return start_date, duration, app_type
+        except Exception as e:
+            self.logger.error(f"服务端密钥验证失败: {e}")
+            return False
 
     def generate_derive_key(self,client_key,server_key):
         """生成派生密钥"""
@@ -159,7 +164,19 @@ class Encoder:
             return True
         else:
             self.logger.error("派生密钥验证失败")
-            exit(1)
+            return False
+
+    def init_keys(self, client_key, server_key):
+        handler = Handler()
+        # 验证服务端密钥并获取激活日期、使用时长和应用程序类型
+        result = self.verify_server_key(client_key, server_key)
+        if result:
+            start_date, duration, app_type = result
+            derive_key = self.generate_derive_key(client_key, server_key)
+            handler.upload_key(self.file_name, client_key, server_key, derive_key)
+            return start_date, duration, app_type
+        else:
+            return False
 
     def verify_keys(self):
         """在UI中使用"""
@@ -171,6 +188,11 @@ class Encoder:
             derive_key = keys["derive_key"]
             if self.verify_client_key(client_key) and self.verify_server_key(client_key,server_key) and self.verify_derive_key(client_key,server_key,derive_key):
                 return client_key,server_key,derive_key
+            else:
+                return False
+        else:
+            self.logger.error("密钥文件丢失")
+            return False
 
     def run(self):
         """新建或验证密钥文件"""
@@ -192,4 +214,5 @@ class Encoder:
                 return client_key,server_key,derive_key
             else:
                 exit(1)
+
 
