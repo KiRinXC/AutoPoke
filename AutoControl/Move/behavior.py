@@ -336,7 +336,7 @@ class BehaviorHatch(Behavior):
 
     def hatch_start_move(self,wait_scope):
         hatch_start_action = self.confirm_method(self.MKHatch.hatch_start_key,self.MMHatch.hatch_start_mouse,"开始孵蛋")
-        self.item_move_without_check(hatch_start_action,"开始孵蛋",wait_scope)
+        self.item_move_with_before_check(self.DTIcon.detect_hatchbox_close_icon,hatch_start_action,"开始孵蛋",wait_scope)
 
     def select_poke_male_move(self, coordinate,wait_scope):
         self.logger.debug("鼠标-->选择公素材")

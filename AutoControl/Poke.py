@@ -49,14 +49,13 @@ class Poke:
         # 初始化计数器
         self.poke_num,self.shiny_num = self.recode['poke_num'],self.recode['shiny_num']
 
-        if self.move_set:
+        if self.move_set and self.turn_set:
             self.move_event.set()
             self.MP = MovePlayer(self.move_event, self.move_set, self.turn_set)
             self.move_method = self.MP.move_method
+            self.turn_method = self.MP.turn_method
+            self.threads.append(self.move)
             self.threads.append(self.turn)
-            if self.turn_set:
-                self.turn_method = self.MP.turn_method
-                self.threads.append(self.move)
             self.threads.append(self.MP.create_block)
 
     def detect(self):
